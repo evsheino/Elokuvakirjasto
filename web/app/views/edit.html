@@ -1,21 +1,34 @@
 <form name="movieForm">
     <p>
         <label>Nimi</label>
-        <input name="name" type="text" ng-model="name" required />
+        <input name="name" type="text" ng-model="movie.name" required />
+        <span ng-show="movieForm.name.$invalid && movieForm.name.$dirty">
+            Nimi vaaditaan!
+        </span>
     </p>
     <p>
         <label>Ohjaaja</label>
-        <input name="name" type="text" ng-model="director" required />
+        <input name="director" type="text" ng-model="movie.director" required />
+        <span ng-show="movieForm.director.$invalid && movieForm.director.$dirty">
+            Ohjaaja vaaditaan!
+        </span>
     </p>
     <p>
         <label>Julkaisuvuosi</label>
-        <input name="name" type="text" ng-model="releaseYear" required />
+        <input name="releaseYear" type="text" ng-model="movie.releaseYear" required />
+        <span ng-show="movieForm.releaseYear.$invalid && movieForm.releaseYear.$dirty">
+            Julkaisuvuosi vaaditaan!
+        </span>
     </p>
     <p>
         <label>Kuvaus</label>
-        <input name="name" type="text" ng-model="description" required />
+        <input name="description" type="text" ng-model="movie.description" required />
+        <span ng-show="movieForm.description.$invalid && movieForm.description.$dirty">
+            Kuvaus vaaditaan!
+        </span>
     </p>
     <p>
-        <input type="submit" value="Tallenna" ng-click="edit()" ng-disabled="movieForm.$invalid" />
+        <input type="submit" value="Tallenna" ng-click="update()" ng-disabled="movieForm.$invalid" />
     </p>
 </form>
+<p><a ng-href="#/movies">Elokuvalistaukseen</a></p>

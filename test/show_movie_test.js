@@ -4,32 +4,22 @@ describe('Show movie', function(){
 	var FirebaseServiceMock, RouteParamsMock;
 
   	beforeEach(function(){
-  		// Lisää moduulisi nimi tähän
-    	module('MyAwesomeModule');
+    	module('MovieApp');
 
-    	FirebaseServiceMock = (function(){
-			return {
-				// Toteuta FirebaseServicen mockatut metodit tähän
-			}
-		})();
-
-		RouteParamsMock = (function(){
-			return {
-				// Toteuta mockattu $routeParams-muuttuja tähän
-			}
-		});
+        FirebaseServiceMock = Mocks.getFirebaseServiceMock();
+        RouteParamsMock = Mocks.getRouteParamsMock();
 
 		// Lisää vakoilijat
-	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
+	    spyOn(FirebaseServiceMock, 'getOne').and.callThrough();
 
     	// Injektoi toteuttamasi kontrolleri tähän
 	    inject(function($controller, $rootScope) {
 	      scope = $rootScope.$new();
 	      // Muista vaihtaa oikea kontrollerin nimi!
-	      controller = $controller('MyAwesomeController', {
+	      controller = $controller('MovieShowController', {
 	        $scope: scope,
 	        FirebaseService: FirebaseServiceMock,
-	       	$routePrams: RouteParamsMock
+            $routeParams: RouteParamsMock
 	      });
 	    });
   	});
@@ -44,6 +34,7 @@ describe('Show movie', function(){
   	* käyttämällä toBeCalled-oletusta.
 	*/
 	it('should show current movie from Firebase', function(){
-		expect(true).toBe(false);
+        expect(FirebaseServiceMock.getOne).toHaveBeenCalled();
+        expect(scope.movie.name).toBe("2001: A Space Odyssey");
 	});
 });

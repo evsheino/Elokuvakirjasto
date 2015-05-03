@@ -1,5 +1,11 @@
 var Mocks = {};
 
+Mocks.getRouteParamsMock = function() {
+    return {
+        key: "-Jo6JPvfVV_7dXv09g4D"
+    };
+};
+
 Mocks.getFirebaseServiceMock = function() {
     var movies = [
         {
@@ -36,7 +42,7 @@ Mocks.getFirebaseServiceMock = function() {
         },
         save: function(movie) {
             for (var i=0, len=movies.length; i < len; i++) {
-                if (scope.movies[i].$id === movie.$id) {
+                if (movies[i].$id === movie.$id) {
                     movies[i] = movie;
                     break;
                 }

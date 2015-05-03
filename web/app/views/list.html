@@ -1,6 +1,10 @@
+<h1>Elokuvakirjasto</h1>
 <div id="movie-container">
     <ul>
         <li ng-repeat="movie in movies">
             <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a>
+            <button type="button" ng-click="remove($index)">Poista</button>
         </li>
+    </ul>
 </div>
+<a ng-href="#/movies/new">Lisää elokuva</a>

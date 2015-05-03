@@ -21,12 +21,18 @@ MovieApp.controller('MovieAddController', function($scope, $location, FirebaseSe
     };
 });
     
-MovieApp.controller('MovieShowController', function($scope, FirebaseService) {
+MovieApp.controller('MovieShowController', function($scope, $routeParams, FirebaseService) {
+    FirebaseService.getOne($routeParams.key, function(movie) { $scope.movie = movie; });
 });
 
-MovieApp.controller('MovieUpdateController', function($scope, FirebaseService) {
-    $scope.update = function(movie){
-        FirebaseService.save(movie);
+MovieApp.controller('MovieEditController', function($scope, $routeParams, $location, FirebaseService) {
+    FirebaseService.getOne($routeParams.key, function(movie) { $scope.movie = movie; });
+    $scope.update = function() {
+        if (!($scope.movie.name && $scope.movie.director && $scope.movie.releaseYear && $scope.movie.description))
+            return;
+
+        FirebaseService.save($scope.movie);
+        $location.path('/movies/' + $routeParams.key);
     };
 });
 
