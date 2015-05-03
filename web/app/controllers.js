@@ -1,4 +1,33 @@
-MovieApp.controller('MovieListController', function($scope, FirebaseService, OmdbService) {
+MovieApp.controller('UserController', function($scope, $location, AuthenticationService){
+  
+    $scope.logIn = function(){
+        AuthenticationService.logUserIn($scope.email, $scope.password)
+                .then(function(){
+                    $location.path('/movies');
+        })
+                .catch(function(){
+                    $scope.message = 'Väärä sähköpostiosoite tai salasana!';
+        });
+    };
+
+    $scope.register = function(){
+        AuthenticationService.createUser($scope.newEmail, $scope.newPassword)
+                .then(function(){
+                    AuthenticationService.logUserIn($scope.newEmail, $scope.newPassword)
+                    .then(function(){
+                        $location.path('/movies');
+            });
+        })
+                .catch(function(){
+                    $scope.message = 'Tapahtui virhe! Yritä uudestaan';
+        });
+    };
+});
+
+MovieApp.controller('MovieListController', function($scope, $location, currentAuth, FirebaseService, OmdbService) {
+    if(!currentAuth){
+        $location.path('/login');
+    }
 	$scope.movies = FirebaseService.getAll();
 
     $scope.remove = function(index){
@@ -12,7 +41,10 @@ MovieApp.controller('MovieListController', function($scope, FirebaseService, Omd
     };
 });
 
-MovieApp.controller('MovieAddController', function($scope, $location, FirebaseService) {
+MovieApp.controller('MovieAddController', function($scope, $location, currentAuth, FirebaseService) {
+    if(!currentAuth){
+        $location.path('/login');
+    }
     $scope.add = function(){
         if (!($scope.name && $scope.director && $scope.releaseYear && $scope.description))
             return;
@@ -27,11 +59,17 @@ MovieApp.controller('MovieAddController', function($scope, $location, FirebaseSe
     };
 });
     
-MovieApp.controller('MovieShowController', function($scope, $routeParams, FirebaseService) {
+MovieApp.controller('MovieShowController', function($scope, $routeParams, $location, currentAuth, FirebaseService) {
+    if(!currentAuth){
+        $location.path('/login');
+    }
     FirebaseService.getOne($routeParams.key, function(movie) { $scope.movie = movie; });
 });
 
-MovieApp.controller('MovieEditController', function($scope, $routeParams, $location, FirebaseService) {
+MovieApp.controller('MovieEditController', function($scope, $routeParams, $location, currentAuth, FirebaseService) {
+    if(!currentAuth){
+        $location.path('/login');
+    }
     FirebaseService.getOne($routeParams.key, function(movie) { $scope.movie = movie; });
     $scope.update = function() {
         if (!($scope.movie.name && $scope.movie.director && $scope.movie.releaseYear && $scope.movie.description))

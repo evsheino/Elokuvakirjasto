@@ -1,0 +1,32 @@
+<p>
+    {{message}}
+</p>
+<h1>Kirjaudu sisään</h1>
+<form name="loginForm">
+    <p>
+        <label>Sähköposti</label>
+        <input name="email" type="text" ng-model="email" required />
+    </p>
+    <p>
+        <label>Salasana</label>
+        <input name="password" type="password" ng-model="password" required />
+    </p>
+    <p>
+        <input type="submit" value="Kirjaudu" ng-click="logIn()" />
+    </p>
+</form>
+
+<h1>Rekisteröidy</h1>
+<form name="registerForm">
+    <p>
+        <label>Sähköposti</label>
+        <input name="newEmail" type="text" ng-model="newEmail" required />
+    </p>
+    <p>
+        <label>Salasana</label>
+        <input name="newPassword" type="password" ng-model="newPassword" required />
+    </p>
+    <p>
+        <input type="submit" value="Rekisteröidy" ng-click="register()" />
+    </p>
+</form>
