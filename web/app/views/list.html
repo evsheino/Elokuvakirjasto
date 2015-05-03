@@ -1,28 +1,72 @@
 <h1>Elokuvakirjasto</h1>
 <div id="search-container">
     <form name="searchForm">
-        <label>Nimi</label>
-        <input name="name" type="text" ng-model="search.name" />
-        <label>Julkaisuvuosi</label>
-        <input name="year" type="text" ng-model="search.year" />
-        <input type="submit" value="Etsi" ng-click="find()" />
+        <div class="form-group">
+            <label for="name">Nimi</label>
+            <input id="name" name="name" class="form-control" type="text" ng-model="search.name" />
+        </div>
+        <div class="form-group">
+            <label for="year">Julkaisuvuosi</label>
+            <input id="year" name="year" class="form-control" type="text" ng-model="search.year" />
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="find()">Etsi</button>
     </form>
+
     <h2><ng-pluralize count="results.length" when="{
                       '0': 'Haulla ei löytynyt elokuvia.',
                       '1': 'Haulla löytyi 1 elokuva.',
                       'other': 'Haulla löytyi {} elokuvaa.'}"></ng-pluralize></h2>
-    <ul>
-        <li ng-repeat="result in results">
-            <a ng-href="http://www.imdb.com/title/{{result.imdbID}}">{{result.Title}} ({{result.Year}})</a>
-        </li>
-    </ul>
+
+    <table class="table" ng-if="results">
+        <thead>
+        <th>
+            Nimi
+        </th>
+        <th>
+            Julkaisuvuosi
+        </th>
+        </thead>
+        <tr ng-repeat="result in results">
+            <td>
+                <a ng-href="http://www.imdb.com/title/{{result.imdbID}}">{{result.Title}} </a>
+            </td>
+            <td>
+                {{result.Year}}
+            </td>
+        </tr>
+    </table>
 </div>
+
+<h1>Elokuvat</h1>
+
 <div id="movie-container">
-    <ul>
-        <li ng-repeat="movie in movies">
-            <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a>
-            <button type="button" ng-click="remove($index)">Poista</button>
-        </li>
-    </ul>
+    <table class="table">
+        <thead>
+            <th>
+                Nimi
+            </th>
+            <th>
+                Ohjaaja
+            </th>
+            <th>
+                Julkaisuvuosi
+            </th>
+            <th></th>
+        </thead>
+        <tr ng-repeat="movie in movies">
+            <td>
+                <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a>
+            </td>
+            <td>
+                {{movie.director}}
+            </td>
+            <td>
+                {{movie.releaseYear}}
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="remove($index)">Poista</button>
+            </td>
+        </tr>
+    </table>
 </div>
 <a ng-href="#/movies/new">Lisää elokuva</a>

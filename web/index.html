@@ -5,17 +5,44 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Elokuvakirjasto</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     </head>
     <body ng-app="MovieApp">
-
-        <button ng-click="logOut()" ng-if="userLoggedIn()">Kirjaudu ulos</button>
-
-        <div ng-view></div>
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#/">Elokuvakirjasto</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a ng-href="#/movies">Elokuvat</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button class="btn btn-default navbar-btn" ng-click="logOut()" ng-if="userLoggedIn()">Kirjaudu ulos</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+            
         <!-- Hyödyllisiä kirjastoja -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src="bower_components/firebase/firebase.js"></script>
         <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
             
         <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
         <script src="app/app.js"></script>    

@@ -1,34 +1,32 @@
+<h1>Muokkaa elokuvaa "{{movie.name}}"</h1>
 <form name="movieForm">
-    <p>
-        <label>Nimi</label>
-        <input name="name" type="text" ng-model="movie.name" required />
+    <div class="form-group">
+        <label for="name">Nimi</label>
+        <input class="form-control" id="name" name="name" type="text" ng-model="movie.name" required />
         <span ng-show="movieForm.name.$invalid && movieForm.name.$dirty">
             Nimi vaaditaan!
         </span>
-    </p>
-    <p>
-        <label>Ohjaaja</label>
-        <input name="director" type="text" ng-model="movie.director" required />
+    </div>
+    <div class="form-group">
+        <label for="director">Ohjaaja</label>
+        <input class="form-control" id="director" name="director" type="text" ng-model="movie.director" required />
         <span ng-show="movieForm.director.$invalid && movieForm.director.$dirty">
             Ohjaaja vaaditaan!
         </span>
-    </p>
-    <p>
-        <label>Julkaisuvuosi</label>
-        <input name="releaseYear" type="text" ng-model="movie.releaseYear" required />
+    </div>
+    <div class="form-group">
+        <label for="releaseYear">Julkaisuvuosi</label>
+        <input class="form-control" id="releaseYear" name="releaseYear" type="text" ng-model="movie.releaseYear" required />
         <span ng-show="movieForm.releaseYear.$invalid && movieForm.releaseYear.$dirty">
             Julkaisuvuosi vaaditaan!
         </span>
-    </p>
-    <p>
-        <label>Kuvaus</label>
-        <input name="description" type="text" ng-model="movie.description" required />
+    </div>
+    <div class="form-group">
+        <label for="description">Kuvaus</label>
+        <textarea class="form-control" id="description" name="description" type="text" ng-model="movie.description" required></textarea>
         <span ng-show="movieForm.description.$invalid && movieForm.description.$dirty">
             Kuvaus vaaditaan!
         </span>
-    </p>
-    <p>
-        <input type="submit" value="Tallenna" ng-click="update()" ng-disabled="movieForm.$invalid" />
-    </p>
+    </div>
+    <button class="btn btn-primary" type="button" ng-click="update()" ng-disabled="movieForm.$invalid">Tallenna</button>
 </form>
-<p><a ng-href="#/movies">Elokuvalistaukseen</a></p>
