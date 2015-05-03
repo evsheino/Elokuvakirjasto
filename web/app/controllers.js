@@ -1,8 +1,14 @@
-MovieApp.controller('MovieListController', function($scope, FirebaseService) {
+MovieApp.controller('MovieListController', function($scope, FirebaseService, OmdbService) {
 	$scope.movies = FirebaseService.getAll();
 
     $scope.remove = function(index){
         FirebaseService.remove(index);
+    };
+
+    $scope.find = function() {
+        OmdbService.findMovie($scope.search.name, $scope.search.year).success(function(movies) {
+            $scope.results = movies.Search || [];
+        });
     };
 });
 

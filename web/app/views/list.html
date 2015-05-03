@@ -1,4 +1,22 @@
 <h1>Elokuvakirjasto</h1>
+<div id="search-container">
+    <form name="searchForm">
+        <label>Nimi</label>
+        <input name="name" type="text" ng-model="search.name" />
+        <label>Julkaisuvuosi</label>
+        <input name="year" type="text" ng-model="search.year" />
+        <input type="submit" value="Etsi" ng-click="find()" />
+    </form>
+    <h2><ng-pluralize count="results.length" when="{
+                      '0': 'Haulla ei löytynyt elokuvia.',
+                      '1': 'Haulla löytyi 1 elokuva.',
+                      'other': 'Haulla löytyi {} elokuvaa.'}"></ng-pluralize></h2>
+    <ul>
+        <li ng-repeat="result in results">
+            <a ng-href="http://www.imdb.com/title/{{result.imdbID}}">{{result.Title}} ({{result.Year}})</a>
+        </li>
+    </ul>
+</div>
 <div id="movie-container">
     <ul>
         <li ng-repeat="movie in movies">
