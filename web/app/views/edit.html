@@ -1,0 +1,21 @@
+<form name="movieForm">
+    <p>
+        <label>Nimi</label>
+        <input name="name" type="text" ng-model="name" required />
+    </p>
+    <p>
+        <label>Ohjaaja</label>
+        <input name="name" type="text" ng-model="director" required />
+    </p>
+    <p>
+        <label>Julkaisuvuosi</label>
+        <input name="name" type="text" ng-model="releaseYear" required />
+    </p>
+    <p>
+        <label>Kuvaus</label>
+        <input name="name" type="text" ng-model="description" required />
+    </p>
+    <p>
+        <input type="submit" value="Tallenna" ng-click="edit()" ng-disabled="movieForm.$invalid" />
+    </p>
+</form>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Elokuvakirjasto</title>
+  </head>
+  <body ng-app="MovieApp">
+      <div ng-controller="MovieController">
+          <h1>Elokuvakirjasto</h1>
+                
+          <h1>Muistilista</h1>
+          <div id="movie-container">
+              <div id="add-movie-container">
+                  <input type="text" placeholder="Uusi tehtävä" ng-model="newTodo">
+                  <button ng-click="add()">Lisää tehtävä</button>
+              </div>
+                    
+              <div class="movie" ng-repeat="movie in movies">
+                  <input type="text" ng-model="movie.priority" ng-blur="setPriority(movie)" class="movie-priority">
+                  <label>
+                      <input type="checkbox" ng-model="movie.done" ng-change="setStatus(movie)"> <span ng-class="{ 'movie-done': movie.done }">{{movie.task}}</span>
+                  </label>
+                  <button class="remove-movie" ng-click="removeTodo($index)">Poista</button>
+              </div>
+          </div>
+      </div>
+    <!-- Hyödyllisiä kirjastoja -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+
+    <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
+    <script src="app/app.js"></script>    
+  </body>
+</html>
